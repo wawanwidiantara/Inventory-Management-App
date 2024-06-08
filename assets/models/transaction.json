@@ -1,0 +1,44 @@
+{
+    "id": "43a0deb1-0589-45bd-9f4f-43dd27056e97",
+    "userId": "c3eyh18z03k",
+    "createdAt": "2024-06-08T07:11:40.841Z",
+    "isCheckedOut": "2024-06-08T09:26:38.806Z",
+    "customerName": "Satria",
+    "customerPhone": "08888888",
+    "customerAddress": "sleman",
+    "totalPrice": 8000300,
+    "items": [
+        {
+            "id": "057b7d99-a3c7-465e-98cc-f1b073fe63ba",
+            "orderId": "43a0deb1-0589-45bd-9f4f-43dd27056e97",
+            "productId": "glwyetbw9qi",
+            "quantity": 3,
+            "price": 300,
+            "product": {
+                "id": "glwyetbw9qi",
+                "name": "pak",
+                "price": 100,
+                "image": "public\\images\\1717828631161-332161560-futuristic_chair_transparent.png",
+                "stock": 7,
+                "minStock": 5,
+                "supplierId": "b2bx5irauu"
+            }
+        },
+        {
+            "id": "b044697f-2bf8-4f8d-8ebc-f7fdfa00737e",
+            "orderId": "43a0deb1-0589-45bd-9f4f-43dd27056e97",
+            "productId": "lkyaqgi2tza",
+            "quantity": 8,
+            "price": 8000000,
+            "product": {
+                "id": "lkyaqgi2tza",
+                "name": "hsvvsbsjsjahbsvshahshshjbdbbdbsvsvvs",
+                "price": 1000000,
+                "image": "public\\images\\1717825822228-869484068-Capstone-Flowchart proses prapemrosesan.drawio.png",
+                "stock": 0,
+                "minStock": 5,
+                "supplierId": "m6gnj9er69"
+            }
+        }
+    ]
+}

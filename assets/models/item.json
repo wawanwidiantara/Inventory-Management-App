@@ -1,0 +1,9 @@
+{
+    "id": "br0q1w1djd",
+    "name": "beton",
+    "price": 100,
+    "image": "public\\images\\1717789711948-717147903-Capstone-Flowchart proses prapemrosesan.drawio.png",
+    "stock": 10,
+    "minStock": 5,
+    "supplierId": "bjylkc39vc6"
+}
