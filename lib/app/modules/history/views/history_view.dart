@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jendral_muda_app/app/constans/colors.dart';
 import 'package:jendral_muda_app/app/modules/history/views/detail_history_view.dart';
+import 'package:mat_month_picker_dialog/mat_month_picker_dialog.dart';
 import '../controllers/history_controller.dart';
 
 class HistoryView extends GetView<HistoryController> {
-  const HistoryView({Key? key}) : super(key: key);
+  const HistoryView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +23,18 @@ class HistoryView extends GetView<HistoryController> {
       backgroundColor: AppColors.mainBackground,
       body: Obx(() {
         if (controller.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (controller.orders.isEmpty) {
-          return Center(child: Text('No orders found.'));
+          return const Center(child: Text('No orders found.'));
         }
 
         return RefreshIndicator(
           onRefresh: controller.fetchOrders,
           child: ListView.builder(
-            padding: EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 80),
+            padding:
+                const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 80),
             itemCount: controller.orders.length,
             itemBuilder: (context, index) {
               final order = controller.orders[index];
@@ -58,43 +60,43 @@ class HistoryView extends GetView<HistoryController> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                           Text(
                             'ID: ${order.id?.substring(0, 10) ?? 'N/A'}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
                             'Created at: ${order.createdAt?.toLocal().toString().split(' ')[0]}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                           Text(
                             'Pembeli: ${order.customerName ?? 'N/A'}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                           Text(
                             'Phone: ${order.customerPhone ?? 'N/A'}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                           Text(
                             'Address: ${order.customerAddress ?? 'N/A'}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                         ],
                       ),
                     ),
@@ -115,8 +117,16 @@ class HistoryView extends GetView<HistoryController> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8)),
               ),
-              onPressed: () {
-                // Handle print report action
+              onPressed: () async {
+                final picked = await showMonthPicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2100),
+                );
+                if (picked != null) {
+                  controller.generateReport(picked.month, picked.year);
+                }
                 FocusScope.of(context).unfocus();
               },
               child: const Text("Cetak Laporan",

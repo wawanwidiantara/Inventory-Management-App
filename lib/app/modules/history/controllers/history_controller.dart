@@ -3,6 +3,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:jendral_muda_app/app/constans/url.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 class HistoryController extends GetxController {
   final orders = <Order>[].obs;
@@ -35,6 +38,35 @@ class HistoryController extends GetxController {
       Get.snackbar('Error', 'Failed to fetch orders: $e');
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<void> generateReport(int month, int year) async {
+    isLoading.value = true;
+    String formattedMonth = month.toString().padLeft(2, '0');
+    print(month);
+    print(formattedMonth);
+    final token = GetStorage().read('token');
+    final response = await http.get(
+      Uri.parse(
+          '${UrlApi.baseAPI}/api/orders/report?month=$formattedMonth&year=$year'),
+      headers: {'Authorization': token},
+    );
+
+    if (response.statusCode == 200) {
+      final bytes = response.bodyBytes;
+      final dir = await getExternalStorageDirectory();
+      final file = File('${dir?.path}/report_${formattedMonth}_$year.pdf');
+
+      await file.writeAsBytes(bytes);
+
+      Get.snackbar('Success', 'Report generated successfully');
+      isLoading.value = false;
+      OpenFile.open(file.path); // Open the PDF file
+    } else {
+      Get.snackbar('Error', 'Failed to generate report');
+      print('Failed to generate report: ${response.statusCode}');
+      print('Response body: ${response.body}');
     }
   }
 }
