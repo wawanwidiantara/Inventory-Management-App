@@ -92,6 +92,7 @@ class AddItemController extends GetxController {
       Get.snackbar('Success', 'Item added successfully');
       Get.offAllNamed(Routes.NAVBAR, arguments: 3); // Ensure this is called
     } else {
+      print(response.statusCode);
       Get.snackbar('Error', 'Failed to add item');
     }
   }

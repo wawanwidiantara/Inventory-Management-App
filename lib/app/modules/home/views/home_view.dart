@@ -47,6 +47,8 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
           const SizedBox(height: 4),
+          ElevatedButton(
+              onPressed: controller.fetchItems, child: const Text("data")),
           Expanded(
             child: Obx(() {
               if (controller.isLoading.value) {

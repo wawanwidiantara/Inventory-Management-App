@@ -25,7 +25,9 @@ class HomeController extends GetxController {
       );
 
       if (response.statusCode == 200) {
+        // print(response.body);
         final List<dynamic> data = json.decode(response.body)['data'];
+        print(data);
         items.value = data.map((json) {
           final item = Item.fromJson(json);
           // item.image = '${UrlApi.baseAPI}/${item.image}';

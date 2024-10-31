@@ -21,10 +21,16 @@ class Item {
   Item.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    price = json['price'];
+    price = (json['price'] is double)
+        ? (json['price'] as double).toInt()
+        : json['price'];
     image = json['image'] != null ? '${UrlApi.baseAPI}/${json['image']}' : null;
-    stock = json['stock'];
-    minStock = json['minStock'];
+    stock = (json['stock'] is double)
+        ? (json['stock'] as double).toInt()
+        : json['stock'];
+    minStock = (json['minStock'] is double)
+        ? (json['minStock'] as double).toInt()
+        : json['minStock'];
     supplierId = json['supplierId'];
   }
 
