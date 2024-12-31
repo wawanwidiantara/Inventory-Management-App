@@ -32,14 +32,19 @@ class HomeView extends GetView<HomeController> {
                   color: AppColors.mainBackground,
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.all(16.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Tunggal Listyanto",
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      Text("18.06/2045"),
+                      Text(
+                        controller.user ?? '',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        // date now on format: 18/06/2045
+                        DateTime.now().toString().substring(0, 10),
+                      ),
                     ],
                   ),
                 ),

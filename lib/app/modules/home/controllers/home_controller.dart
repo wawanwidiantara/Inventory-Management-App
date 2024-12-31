@@ -8,6 +8,7 @@ import 'package:jendral_muda_app/app/data/models/item_model.dart';
 class HomeController extends GetxController {
   final RxList<Item> items = <Item>[].obs;
   final isLoading = false.obs;
+  final user = GetStorage().read('user_name');
 
   @override
   void onInit() {
